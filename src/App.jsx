@@ -368,11 +368,7 @@ const WelcomeScreen = () => {
 // Componente raiz da aplicação
 function App() {
   return (
-    <AuthProvider>
-      <ProtectedRoute>
-        <MainApp />
-      </ProtectedRoute>
-    </AuthProvider>
+    <MainApp />
   )
 }
 
