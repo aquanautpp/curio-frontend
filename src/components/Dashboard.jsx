@@ -243,12 +243,15 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {studentData.achievements.map((achievement) => (
-                    <div key={achievement.id} className="flex items-center space-x-3">
-                      <achievement.icon className={`h-6 w-6 ${achievement.color}`} />
-                      <span className="text-sm font-medium">{achievement.title}</span>
-                    </div>
-                  ))}
+                  {studentData.achievements.map((achievement) => {
+                    const Icon = achievement.icon
+                    return (
+                      <div key={achievement.id} className="flex items-center space-x-3">
+                        <Icon className={`h-6 w-6 ${achievement.color}`} />
+                        <span className="text-sm font-medium">{achievement.title}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </CardContent>
             </Card>
