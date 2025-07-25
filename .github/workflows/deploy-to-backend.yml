@@ -1,0 +1,45 @@
+name: Build and Deploy to Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout frontend repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies and build
+        run: |
+          npm install -g pnpm
+          pnpm install
+          pnpm run build
+
+      - name: Copy build to backend repo
+        uses: actions/checkout@v3
+        with:
+          repository: aquanautpp/curio-backend
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          path: backend
+
+      - name: Sync dist to backend static folder
+        run: |
+          rm -rf backend/src/static/*
+          cp -r dist/* backend/src/static/
+
+      - name: Commit and push to backend
+        run: |
+          cd backend
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/static
+          git commit -m "Deploy static files from frontend [skip ci]" || echo "No changes to commit"
+          git push
