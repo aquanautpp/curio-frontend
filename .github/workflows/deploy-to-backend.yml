@@ -23,14 +23,14 @@ jobs:
           pnpm install
           pnpm run build
 
-      - name: Copy build to backend repo
+      - name: Checkout backend repo
         uses: actions/checkout@v3
         with:
           repository: aquanautpp/curio-backend
           token: ${{ secrets.PERSONAL_TOKEN }}
           path: backend
 
-      - name: Sync dist to backend static folder
+      - name: Copy dist to backend static folder
         run: |
           rm -rf backend/src/static/*
           cp -r dist/* backend/src/static/
