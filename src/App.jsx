@@ -27,7 +27,8 @@ import {
   X,
   Sparkles,
   Target,
-  Zap
+  Zap,
+  Play
 } from 'lucide-react'
 
 // Componente principal da aplicação
@@ -116,18 +117,19 @@ const MainApp = () => {
   // Efeito para demonstrar notificações
   useEffect(() => {
     const welcomeTimer = setTimeout(() => {
-      addNotification(`Bem-vindo de volta, ${user?.name || 'Estudante'}! 🎉`, 'success')
+      addNotification('Bem-vindo de volta, Victor! 🎉', 'success')
     }, 1000)
 
     return () => clearTimeout(welcomeTimer)
-  }, [user])
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-50">
       <AnimationStyles />
       
       {/* Header */}
- onMenuClick={() => setSidebarOpen(!sidebarOpen)}
+      <Header 
+        onMenuClick={() => setSidebarOpen(!sidebarOpen)}
       />
 
       <div className="flex">
@@ -176,21 +178,22 @@ const MainApp = () => {
           </nav>
 
           {/* User Info */}
-<div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-gray-50">
-  <div className="flex items-center gap-3">
-    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-      <User className="w-4 h-4 text-white" />
-    </div>
-    <div className="flex-1 min-w-0">
-      <p className="text-sm font-medium text-gray-900 truncate">
-        Victor Pires
-      </p>
-      <p className="text-xs text-gray-500">
-        7º Ano
-      </p>
-    </div>
-  </div>
-</div>
+          <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-gray-50">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 truncate">
+                  Victor Pires
+                </p>
+                <p className="text-xs text-gray-500">
+                  7º Ano
+                </p>
+              </div>
+            </div>
+          </div>
+        </aside>
 
         {/* Overlay para mobile */}
         {sidebarOpen && (
@@ -348,6 +351,11 @@ const WelcomeScreen = () => {
       </div>
     </div>
   )
+}
+
+// Exporta apenas o MainApp (sem autenticação)
+function App() {
+  return <MainApp />
 }
 
 export default App
