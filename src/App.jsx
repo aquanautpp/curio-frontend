@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { AuthProvider, useAuth, ProtectedRoute } from './components/AuthSystem.jsx'
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 import DashboardFunctional from './components/DashboardFunctional.jsx'
@@ -24,7 +23,6 @@ import {
   Brain,
   BookOpen,
   User,
-  LogOut,
   Menu,
   X,
   Sparkles,
@@ -34,7 +32,6 @@ import {
 
 // Componente principal da aplicação
 const MainApp = () => {
-  const { user, logout } = useAuth()
   const [activeSection, setActiveSection] = useState('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -130,10 +127,7 @@ const MainApp = () => {
       <AnimationStyles />
       
       {/* Header */}
-      <Header 
-        user={user}
-        onMenuClick={() => setSidebarOpen(!sidebarOpen)}
-        onLogout={logout}
+ onMenuClick={() => setSidebarOpen(!sidebarOpen)}
       />
 
       <div className="flex">
@@ -182,30 +176,21 @@ const MainApp = () => {
           </nav>
 
           {/* User Info */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-gray-50">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">
-                  {user?.name || 'Estudante'}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {user?.grade || 'Ensino Fundamental'}
-                </p>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={logout}
-                className="text-gray-500 hover:text-red-600"
-              >
-                <LogOut className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        </aside>
+<div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-gray-50">
+  <div className="flex items-center gap-3">
+    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+      <User className="w-4 h-4 text-white" />
+    </div>
+    <div className="flex-1 min-w-0">
+      <p className="text-sm font-medium text-gray-900 truncate">
+        Victor Pires
+      </p>
+      <p className="text-xs text-gray-500">
+        7º Ano
+      </p>
+    </div>
+  </div>
+</div>
 
         {/* Overlay para mobile */}
         {sidebarOpen && (
@@ -365,16 +350,4 @@ const WelcomeScreen = () => {
   )
 }
 
-// Componente raiz da aplicação
-function App() {
-  return (
-    <AuthProvider>
-      <ProtectedRoute>
-        <MainApp />
-      </ProtectedRoute>
-    </AuthProvider>
-  )
-}
-
 export default App
-
