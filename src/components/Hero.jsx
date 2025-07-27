@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import { ArrowRight, Brain, Target, Zap } from 'lucide-react'
 
-const Hero = () => {
+const Hero = ({ onNavigate }) => {
   return (
     <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,15 +16,24 @@ const Hero = () => {
             Estônia e Singapura com inteligência artificial para personalizar o aprendizado de cada estudante.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="text-lg px-8 py-3">
-              Começar Agora
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-3">
-              Ver Demo
-            </Button>
-          </div>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <Button
+          size="lg"
+          className="text-lg px-8 py-3"
+          onClick={() => onNavigate('dashboard')}
+        >
+          Começar Agora
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+        <Button
+          variant="outline"
+          size="lg"
+          className="text-lg px-8 py-3"
+          onClick={() => onNavigate('singapore')}
+        >
+          Ver Demo
+        </Button>
+      </div>
 
           {/* Features Grid */}
           <div className="grid md:grid-cols-3 gap-8 mt-16">
@@ -68,4 +77,3 @@ const Hero = () => {
 }
 
 export default Hero
-
