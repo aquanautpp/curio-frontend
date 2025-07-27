@@ -12,6 +12,15 @@ export default {
     "text-blue-800",
     "bg-purple-100",
     "text-purple-800",
+    // cores personalizadas do curió (para purgar corretamente se usadas via string)
+    "bg-curio-light",
+    "bg-curio-medium",
+    "bg-curio-dark",
+    "bg-curio-accent",
+    "text-curio-light",
+    "text-curio-medium",
+    "text-curio-dark",
+    "text-curio-accent"
   ],
   theme: {
     extend: {
@@ -49,6 +58,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Paleta inspirada no pássaro curió
+        curio: {
+          light: "#f3e5d7",   // bege claro
+          medium: "#b57f4c",  // marrom claro / ferrugem
+          dark: "#4b3621",    // marrom escuro
+          accent: "#8c5739"   // ferrugem intenso
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
