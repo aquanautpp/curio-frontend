@@ -14,13 +14,38 @@ function App () {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Definição das seções e ícones correspondentes
-  const sections = [
-    { id: 'hero', name: 'Início', icon: Home, component: Hero }
-    { id: 'dashboard', name: 'Dashboard', icon: Trophy, component: Dashboard },
-    { id: 'singapore', name: 'Método Singapura', icon: Brain, component: SingaporeMethod },
-    { id: 'problem', name: 'Problema do Dia', icon: Target, component: ProblemOfTheDay },
-    { id: 'tutor', name: 'Tutor de IA', icon: MessageCircle, component: AITutorChat },
-  ]
+const sections = [
+  {
+    id: 'hero',
+    name: 'Início',
+    icon: Home,
+    component: () => <Hero onNavigate={setActiveSection} />
+  },
+  {
+    id: 'dashboard',
+    name: 'Dashboard',
+    icon: Trophy,
+    component: () => <Dashboard onNavigate={setActiveSection} />
+  },
+  {
+    id: 'singapore',
+    name: 'Método Singapura',
+    icon: Brain,
+    component: () => <SingaporeMethod onNavigate={setActiveSection} />
+  },
+  {
+    id: 'problem',
+    name: 'Problema do Dia',
+    icon: Target,
+    component: ProblemOfTheDay
+  },
+  {
+    id: 'tutor',
+    name: 'Tutor de IA',
+    icon: MessageCircle,
+    component: AITutorChat
+  }
+]
 
   // Encontra o componente atual a partir da seção selecionada
   const CurrentComponent =
