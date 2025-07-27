@@ -15,11 +15,11 @@ function App () {
 
   // Definição das seções e ícones correspondentes
   const sections = [
+    { id: 'hero', name: 'Início', icon: Home, component: Hero }
     { id: 'dashboard', name: 'Dashboard', icon: Trophy, component: Dashboard },
     { id: 'singapore', name: 'Método Singapura', icon: Brain, component: SingaporeMethod },
     { id: 'problem', name: 'Problema do Dia', icon: Target, component: ProblemOfTheDay },
     { id: 'tutor', name: 'Tutor de IA', icon: MessageCircle, component: AITutorChat },
-    { id: 'hero', name: 'Início', icon: Home, component: Hero }
   ]
 
   // Encontra o componente atual a partir da seção selecionada
