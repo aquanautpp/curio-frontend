@@ -15,7 +15,7 @@ import {
   Target
 } from 'lucide-react'
 
-const Dashboard = () => {
+const Dashboard = ({ onNavigate }) => {
   const [studentData] = useState({
     name: "Ana Silva",
     grade: "7º Ano",
@@ -268,7 +268,11 @@ const Dashboard = () => {
               {aiInsights.recommendedNextSteps.map((step, index) => (
                 <div key={index} className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <p className="text-sm text-blue-800">{step}</p>
-                  <Button size="sm" className="mt-3 w-full">
+                  <Button onClick={() => {
+                    if (step.includes('álgebra')) onNavigate('problem');
+                    else if (step.includes('interpretação de texto')) onNavigate('tutor');
+                    else if (step.includes('frações')) onNavigate('singapore');
+                  }}>
                     Começar
                   </Button>
                 </div>
