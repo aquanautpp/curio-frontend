@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm install -g pnpm
-          pnpm install
+          pnpm install --no-frozen-lockfile
           pnpm run build
 
       - name: Checkout backend repo
