@@ -4,6 +4,15 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+safelist: [
+// cores utilizadas no componente Método de Singapura e outros lugares
+'bg-green-100',
+'text-green-800',
+'bg-blue-100',
+'text-blue-800',
+'bg-purple-100',
+'text-purple-800',
+ ],  
   theme: {
     extend: {
       colors: {
