@@ -17,29 +17,30 @@ import {
 } from 'lucide-react'
 
 function App() {
-  const [activeSection, setActiveSection] = useState('hero')
+  const [activeSection, setActiveSection] = useState('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const sections = [
-    { id: 'hero', name: 'Início', icon: Home, component: Hero },
-    { id: 'dashboard', name: 'Dashboard', icon: Trophy, component: Dashboard },
+    { id: 'dashboard', name: 'Dashboard', icon: Home, component: Dashboard },
     { id: 'singapore', name: 'Método Singapura', icon: Brain, component: SingaporeMethod },
     { id: 'problem', name: 'Problema do Dia', icon: Target, component: ProblemOfTheDay },
     { id: 'tutor', name: 'Tutor de IA', icon: MessageCircle, component: AITutorChat }
   ]
 
-  const CurrentComponent = sections.find(s => s.id === activeSection)?.component || Hero
+  const currentComponent = sections.find(s => s.id === activeSection)?.component || Dashboard
 
   return (
-    <div className="main-layout">
+    <div className="min-layout">
       {/* Overlay para mobile */}
-      <div 
-        className={`overlay ${sidebarOpen ? 'show' : ''}`}
-        onClick={() => setSidebarOpen(false)}
-      />
+      {sidebarOpen && (
+        <div 
+          className="overlay ${sidebarOpen ? 'show' : ''}" 
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
-      <div className={`sidebar ${!sidebarOpen ? 'sidebar-hidden' : ''}`}>
+      <div className={`sidebar ${sidebarOpen ? 'sidebar-hidden' : ''}`}>
         <div className="sidebar-content">
           {/* Logo */}
           <div className="sidebar-logo">
@@ -106,12 +107,12 @@ function App() {
                 <User size={20} />
               </div>
               <div>
-                <div style={{ fontWeight: '600', fontSize: '0.875rem', color: '#111827' }}>
-                  Victor Pires
-                </div>
-                <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
                   7º Ano
                 </div>
+                <span style={{ fontSize: '0.875rem', fontWeight: '500' }}>
+                  Victor Pires
+                </span>
               </div>
             </div>
           </div>
@@ -119,7 +120,7 @@ function App() {
       </div>
 
       {/* Conteúdo Principal */}
-      <div className={`main-content ${sidebarOpen ? '' : 'main-content-full'}`}>
+      <div className="main-content">
         {/* Header */}
         <header className="header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -133,7 +134,7 @@ function App() {
               {sections.find(s => s.id === activeSection)?.name || 'Curió'}
             </h1>
           </div>
-          
+
           <div className="header-user">
             <User size={20} />
             <span style={{ fontSize: '0.875rem', fontWeight: '500' }}>
@@ -144,7 +145,10 @@ function App() {
 
         {/* Conteúdo da Seção */}
         <main className="fade-in">
-          <CurrentComponent />
+          {activeSection === 'dashboard' && <Dashboard />}
+          {activeSection === 'singapore' && <SingaporeMethod />}
+          {activeSection === 'problem' && <ProblemOfTheDay />}
+          {activeSection === 'tutor' && <AITutorChat />}
         </main>
       </div>
     </div>
@@ -152,4 +156,3 @@ function App() {
 }
 
 export default App
-
