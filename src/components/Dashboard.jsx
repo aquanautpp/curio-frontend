@@ -266,8 +266,8 @@ const Dashboard = ({ onNavigate }) => {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {aiInsights.recommendedNextSteps.map((step, index) => (
-                <div key={index} className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <p className="text-sm text-blue-800">{step}</p>
+                <div key={index} className="flex items-center justify-between py-2">
+                  <span>{step}</span>
                   <Button onClick={() => {
                     if (step.includes('álgebra')) onNavigate('problem');
                     else if (step.includes('interpretação de texto')) onNavigate('tutor');
