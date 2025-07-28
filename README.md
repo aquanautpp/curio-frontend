@@ -62,7 +62,7 @@ A aplicação estará disponível em `http://localhost:5173` (ou outra porta, se
 Se o seu backend estiver hospedado em um URL diferente, você pode configurar a variável de ambiente `VITE_API_BASE_URL` no Render:
 
 ```bash
-VITE_API_BASE_URL=https://seu-backend.render.com/api
+VITE_API_BASE_URL=https://curio-backend-1.onrender.com/api
 ```
 
 ## 🏗️ Estrutura do Projeto
