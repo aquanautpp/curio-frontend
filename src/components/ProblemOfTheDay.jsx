@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea.jsx';
 import { Badge } from '@/components/ui/badge.jsx';
 import { Loader2, CheckCircle, XCircle, Lightbulb } from 'lucide-react';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const API_BASE_URL = 'https://curio-backend.onrender.com/api';
 
 const ProblemOfTheDay = () => {
   const [problem, setProblem] = useState(null);
