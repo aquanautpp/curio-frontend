@@ -36,15 +36,45 @@ const ProblemOfTheDay = () => {
       }
     } catch (error) {
       console.error('Erro de rede ao buscar problema:', error);
+      useFallbackProblem();
     } finally {
       setLoading(false);
     }
   };
 
+  const useFallbackProblem = () => {
+    const fallbackProblem = {
+      id: 'fallback-1',
+      title: 'Divisão de Frutas',
+      description: 'Maria tem 24 maçãs e quer dividir igualmente entre seus 6 amigos. Quantas maçãs cada amigo receberá?',
+      category: 'Divisão',
+      difficulty: 'Fácil',
+      resources: JSON.stringify(['Use a divisão', 'Pense em distribuir igualmente']),
+      answer: '4' // Resposta para verificação local
+    };
+    setProblem(fallbackProblem);
+  };
+
+  
   const handleSubmit = async () => {
     if (!problem || !answer.trim()) return;
 
     setSubmitting(true);
+
+  if (problem.id && problem.id.toString().startsWith('fallback')) {
+    // Verificação local
+    const isCorrect = answer.trim() === problem.answer;
+    setSubmissionResult({
+      success: true,
+      is_correct: isCorrect,
+      feedback: isCorrect ? 
+        'Parabéns! Você acertou! Cada amigo receberá 4 maçãs.' : 
+        'Tente novamente. Lembre-se: dividir é distribuir igualmente.'
+    });
+    setSubmitting(false);
+    return;
+  }
+      
     try {
       const response = await fetch(`${API_BASE_URL}/problems/${problem.id}/submit`, {
         method: 'POST',
@@ -72,6 +102,11 @@ const ProblemOfTheDay = () => {
 
   const fetchHint = async () => {
     if (!problem) return;
+    if (problem.id && problem.id.toString().startsWith('fallback')) {
+    setHint('Pense assim: Se Maria tem 24 maçãs e 6 amigos, quantas maçãs cada um recebe? É só dividir 24 por 6!');
+    setShowingHint(true);
+    return;
+  }    
     setShowingHint(true);
     try {
       const response = await fetch(`${API_BASE_URL}/problems/${problem.id}/hint`);
